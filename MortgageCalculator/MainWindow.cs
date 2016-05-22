@@ -27,21 +27,33 @@ namespace MortgageCalculator
             //    n = total number of payments = years of amortization * rate of payments
 
             var rateOfPayments = Convert.ToInt32(paymentFreqBox.Text);                                                   
-            var p = Convert.ToDouble(principalBox.Text);                    
-            var r = Convert.ToDouble(interestRateBox.Text)/rateOfPayments/100;
-            var n = Convert.ToInt32(amortPdBox.Text)*rateOfPayments;
-            var c = (r * p) / (1 - (Math.Pow(1+ r,-n)));
-            output.Text = c.ToString();
-            using (StreamWriter sw = new StreamWriter("output.txt"))
+            var principal = Convert.ToDouble(principalBox.Text);                    
+            var interestRate = Convert.ToDouble(interestRateBox.Text)/rateOfPayments/100;
+            var numberOfPayments = Convert.ToInt32(amortPdBox.Text)*rateOfPayments;
+            var totalIntervalPayment = Math.Round((interestRate * principal) / (1 - (Math.Pow(1+ interestRate,-numberOfPayments))),2);  
+            output.Text = totalIntervalPayment.ToString();
+            using (StreamWriter sw = new StreamWriter("paymentSchedule.txt"))
             {
-                var i = -1;
-                while (p > 0)
+                var week = 1;
+                while (principal > 0)
                 {
-                    sw.WriteLine("Amount owed: " + p);
-                    p = p * (1 + r) - c;
-                    i++;
-                }
-                sw.WriteLine(i + 1);
+                    var principalWithoutInterest = principal;
+                    var interestPaid = Math.Round(principal * interestRate,2);
+                    principal = Math.Round(principal * (1 + interestRate) - totalIntervalPayment,2);
+                    string output;
+                    if (principal >= 0)
+                    {
+                        output = string.Format("Week {0} Amount before interest: {1:C2}, Interest Paid: {2:C2}, Principal Paid: {3:C2}, Amount after interest: {4:C2}"
+                            , week, principalWithoutInterest, interestPaid, totalIntervalPayment - interestPaid, principal);
+                    }
+                    else
+                    {
+                        output = string.Format("Week {0} Amount before interest: {1:C2}, Interest Paid: {2:C2}, Principal Paid: {3:C2}, Amount after interest: {4:C2}"
+                             , week, principalWithoutInterest, interestPaid, principalWithoutInterest - interestPaid, 0);
+                    }
+                    sw.WriteLine(output);           
+                    week++;
+                }                    
             }
 
         }
