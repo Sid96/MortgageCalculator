@@ -32,7 +32,6 @@
             this.interestRate = new System.Windows.Forms.Label();
             this.principalBox = new System.Windows.Forms.TextBox();
             this.interestRateBox = new System.Windows.Forms.TextBox();
-            this.paymentFreqBox = new System.Windows.Forms.TextBox();
             this.amortPdBox = new System.Windows.Forms.TextBox();
             this.calculateButton = new System.Windows.Forms.Button();
             this.percent = new System.Windows.Forms.Label();
@@ -40,6 +39,7 @@
             this.output = new System.Windows.Forms.TextBox();
             this.amortPd = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.paymentFreqBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // principal
@@ -73,13 +73,6 @@
             this.interestRateBox.Name = "interestRateBox";
             this.interestRateBox.Size = new System.Drawing.Size(170, 26);
             this.interestRateBox.TabIndex = 3;
-            // 
-            // paymentFreqBox
-            // 
-            this.paymentFreqBox.Location = new System.Drawing.Point(219, 66);
-            this.paymentFreqBox.Name = "paymentFreqBox";
-            this.paymentFreqBox.Size = new System.Drawing.Size(170, 26);
-            this.paymentFreqBox.TabIndex = 2;
             // 
             // amortPdBox
             // 
@@ -142,18 +135,28 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Payment per Period";
             // 
+            // paymentFreqBox
+            // 
+            this.paymentFreqBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.paymentFreqBox.FormattingEnabled = true;
+            this.paymentFreqBox.Location = new System.Drawing.Point(219, 66);
+            this.paymentFreqBox.Name = "paymentFreqBox";
+            this.paymentFreqBox.Size = new System.Drawing.Size(170, 28);
+            this.paymentFreqBox.TabIndex = 14;
+            this.paymentFreqBox.Text = "Weekly";
+            // 
             // mainWindow
             // 
             this.AcceptButton = this.calculateButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(426, 304);
+            this.Controls.Add(this.paymentFreqBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.output);
             this.Controls.Add(this.percent);
             this.Controls.Add(this.calculateButton);
             this.Controls.Add(this.amortPdBox);
-            this.Controls.Add(this.paymentFreqBox);
             this.Controls.Add(this.interestRateBox);
             this.Controls.Add(this.principalBox);
             this.Controls.Add(this.amortPd);
@@ -173,7 +176,6 @@
         private System.Windows.Forms.Label interestRate;
         private System.Windows.Forms.TextBox principalBox;
         private System.Windows.Forms.TextBox interestRateBox;
-        private System.Windows.Forms.TextBox paymentFreqBox;
         private System.Windows.Forms.TextBox amortPdBox;
         private System.Windows.Forms.Button calculateButton;
         private System.Windows.Forms.Label percent;
@@ -181,6 +183,7 @@
         private System.Windows.Forms.TextBox output;
         private System.Windows.Forms.Label amortPd;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox paymentFreqBox;
     }
 }
 
